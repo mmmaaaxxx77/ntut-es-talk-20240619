@@ -1,0 +1,99 @@
+{
+    "settings": {
+        "number_of_shards": 3,
+        "number_of_replicas": 1,
+        "index.codec": "best_compression"
+    },
+    "mappings": {
+        "dynamic": "strict",
+        "properties": {
+            "post": {
+                "properties": {
+                    "id": {
+                        "type": "keyword"
+                    },
+                    "type": {
+                        "type": "keyword"
+                    },
+                    "poster": {
+                        "type": "keyword",
+                        "eager_global_ordinals": true
+                    }
+                }
+            },
+            "site": {
+                "properties": {
+                    "name": {
+                        "type": "keyword",
+                        "eager_global_ordinals": true
+                    },
+                    "channel": {
+                        "type": "text",
+                        "fielddata": true,
+                        "norms": false,
+                        "analyzer": "standard",
+                        "fielddata_frequency_filter": {
+                            "min": 0.001,
+                            "max": 0.1,
+                            "min_segment_size": 5000
+                        },
+                        "eager_global_ordinals": true,
+                        "fields": {
+                            "raw": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "title": {
+                "type": "text",
+                "analyzer": "standard",
+                "fielddata": true,
+                "fielddata_frequency_filter": {
+                    "min": 0.001,
+                    "max": 0.1,
+                    "min_segment_size": 5000
+                }
+            },
+            "posttime": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm"
+            },
+            "author": {
+                "properties": {
+                    "id": {
+                        "type": "keyword"
+                    },
+                    "name": {
+                        "type": "text",
+                        "fielddata": true,
+                        "norms": false,
+                        "analyzer": "standard",
+                        "fielddata_frequency_filter": {
+                            "min": 0.001,
+                            "max": 0.1,
+                            "min_segment_size": 5000
+                        },
+                        "eager_global_ordinals": true,
+                        "fields": {
+                            "raw": {
+                                "type": "keyword"
+                            }
+                        }
+                    }
+                }
+            },
+            "content": {
+                "type": "text",
+                "analyzer": "standard",
+                "fielddata": true,
+                "fielddata_frequency_filter": {
+                    "min": 0.001,
+                    "max": 0.1,
+                    "min_segment_size": 5000
+                }
+            }
+        }
+    }
+}
