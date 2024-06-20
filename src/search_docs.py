@@ -16,7 +16,14 @@ def search_docs():
 
     # Execute the search query
     response = es.search(
-        index="post", body={"query": {"query_string": {"query": query_string}}}
+        index="post",
+        body={
+            "query": {
+                "query_string": {
+                    "query": query_string,
+                }
+            }
+        },
     )
 
     # Print the results
